@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lora', serif;
+    color: #333;
+}
+
+body{
+    background-color: rgb(228, 228, 228);
+}
+
+#head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.meniu, .cont{
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    width: 15%;
+}
+
+.titlucitat{
+    text-align: center;
+    padding: 1.25%;
+    flex-basis: 90%;
+}
+
+#titlu{
+    font-size: 36px;
+}
+
+.citat{
+    padding-top: 0.25%;
+    padding-bottom: 0.5%;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.citat > div{
+    display: inline-block;
+}
+
+.citat div:nth-child(2){
+    color: #669DB3FF;
+}
+
+hr{
+    height: 2px;
+    border: none;
+    background-color: #333;
+}
+
+.cont{
+    margin-right: 3%;
+}
+
+.container{
+    width: 100%;
+    height: 5vh;
+}
+
+#search{
+    display:flex;
+    flex-direction: row;
+}
+
+#txtSearch{
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    border-top-color: #333;
+    border-bottom-color: #333;
+    outline: none;
+    padding: 10px 35px 10px 15px;
+    background: transparent;
+}
+
+#btnSearch{
+    background:transparent;
+    border: none;
+    outline: none;
+    margin-left: -33px;
+}
+
+#btnSearch img{
+    width: 20px;
+    height: 20px;  
+}
+
+.despre1{
+    font-size: 28px;
+    font-weight: bold;
+    padding: 3%;
+}
+
+.info1{
+    font-size: 18px;
+    margin-left: 8%;
+}
+
+.rol{
+    font-size: 24px;
+    font-weight: bold;
+}
