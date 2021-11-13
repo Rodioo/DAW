@@ -16,13 +16,18 @@ body{
     align-items: center;
 }
 
-.meniu, .cont{
+.acasa, .cont{
     cursor: pointer;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
     color: #333;
     width: 15%;
+}
+ 
+#homeImg{
+    height: 40%;
+    width: 40%;
 }
 
 .titlucitat{
@@ -93,6 +98,27 @@ hr{
     width: 20px;
     height: 20px;  
 }
+
+.meniu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: solid 2px;
+}
+
+.meniu a{
+    text-decoration: none;
+    padding: 0.75%;
+    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.meniu a:hover, .contTxt:hover{
+    color: #669DB3FF;
+}
+
 
 .despre1{
     font-size: 28px;
