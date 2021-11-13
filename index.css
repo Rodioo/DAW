@@ -115,6 +115,11 @@ hr{
     color: #333;
 }
 
+.contTxt
+{
+    text-decoration: none;
+}
+
 .meniu a:hover, .contTxt:hover{
     color: #669DB3FF;
 }
