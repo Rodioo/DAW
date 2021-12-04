@@ -1,8 +1,50 @@
+<?php
+
+    session_start();
+
+    $host = "localhost";
+    $user = "root";
+    $pass = "ceva28439";
+    $db = "proiect";
+
+    $con = mysqli_connect($host, $user, $pass);
+    mysqli_select_db($con, $db);
+
+    if(isset($_POST['email'])){
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
+        $pass = md5($pass);
+
+        $sql = "select * from users where email='".$email."' and parola='".$pass."' limit 1";
+
+        $result = mysqli_query($con, $sql);
+
+        if(mysqli_num_rows($result) == 1){
+            
+            $row = $result->fetch_assoc();
+            $_SESSION['loggedin'] = true;
+            $_SESSION['email'] = $email;
+            $_SESSION['nume'] = $row['nume'];
+            $_SESSION['prenume'] = $row["prenume"];
+            $_SESSION['nr_penalizari'] = $row["nr_penalizari"];
+            header("Location:mainCont.php");
+            exit();
+        }
+        else{
+            echo '<script>alert("Email/parola gresita")</script>';
+        }
+
+    }
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang = "en">
     <head>
         <title>Lumea cartii</title>
-        <link rel = "stylesheet" href = "home.css">
+        <link rel = "stylesheet" href = "cont.css">
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
         <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Book_Hexagonal_Icon.svg/1189px-Book_Hexagonal_Icon.svg.png">
     </head>
@@ -39,5 +81,14 @@
             <a href = "carti.html">Carti</a>
             <a href = "index.html">Despre</a>
         </div>
+        <div class="signup-form">
+            <form action ="#" method="post">
+                <input type = "email" placeholder="Email" class="txt" name = "email" required>
+                <input type = "password" placeholder="Parola" class="txt" name = "pass" required>
+                <input type = "submit" value="Login" class="registerBtn" name="btn-save">
+            </form>
+            <a id = "goLog" href="cont.php">Nu ai cont? Inregistreaza-te aici</a></a>
+        </div>
+        
     </body>
 </html>

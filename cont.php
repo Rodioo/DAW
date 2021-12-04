@@ -2,7 +2,7 @@
 <html lang = "en">
     <head>
         <title>Lumea cartii</title>
-        <link rel = "stylesheet" href = "home.css">
+        <link rel = "stylesheet" href = "cont.css">
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
         <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Book_Hexagonal_Icon.svg/1189px-Book_Hexagonal_Icon.svg.png">
     </head>
@@ -23,7 +23,7 @@
             </div>
 
             <div class = "cont">
-                <a href = "mainCont.php" class = "contTxt">CONTUL TAU</a>
+                <a href = "cont.php" class = "contTxt">CONTUL TAU</a>
             </div>   
         </header>
         <div class ="container">
@@ -39,5 +39,17 @@
             <a href = "carti.html">Carti</a>
             <a href = "index.html">Despre</a>
         </div>
+        <div class="signup-form">
+            <form action ="process.php" method="post">
+                <input type = "text" placeholder="Nume" class="txt" name="nume" required>
+                <input type = "text" placeholder="Prenume" class="txt" name="prenume" required>
+                <input type = "email" placeholder="Email" class="txt" name = "email" required>
+                <input type = "password" placeholder="Parola" class="txt" name = "pass" required>
+                <input type = "password" placeholder="Confirma parola" class="txt" name = "cpass" required>
+                <input type = "submit" value="Register" class="registerBtn" name="btn-save">
+            </form>
+            <a id = "goLog" href="login.php">Deja ai un cont?Logheaza-te aici</a></a>
+        </div>
+        
     </body>
 </html>
