@@ -40,6 +40,8 @@
 
             while ($row = $result->fetch_assoc())
             {
+                echo "ISBN: " . $row['isbn'];
+                echo "<br>";
                 echo "Titlu: " . $row['titlu'];
                 echo "<br>";
                 echo "Autor: " . $row['autor'];
