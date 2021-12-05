@@ -22,6 +22,9 @@
             echo "Descriere: " . $row['descriere'];
             echo "<br>";
             echo '<img src="'.$row['url_img'].'"/>';
+            echo "<br>";
+            echo "<hr>";
+            echo "<br>";
         }
     }
 ?>
