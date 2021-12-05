@@ -2,7 +2,7 @@
 <html lang = "en">
     <head>
         <title>Lumea cartii</title>
-        <link rel = "stylesheet" href = "cont.css">
+        <link rel = "stylesheet" href = "home.css">
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
         <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Book_Hexagonal_Icon.svg/1189px-Book_Hexagonal_Icon.svg.png">
     </head>
@@ -23,7 +23,7 @@
             </div>
 
             <div class = "cont">
-                <a href = "cont.php" class = "contTxt">CONTUL TAU</a>
+                <a href = "mainCont.php" class = "contTxt">CONTUL TAU</a>
             </div>   
         </header>
         <div class = "meniu">
@@ -31,17 +31,28 @@
             <a href = "carti.php">Cauta carti</a>
             <a href = "index.php">Despre</a>
         </div>
-        <div class="signup-form">
-            <form action ="process.php" method="post">
-                <input type = "text" placeholder="Nume" class="txt" name="nume" required>
-                <input type = "text" placeholder="Prenume" class="txt" name="prenume" required>
-                <input type = "email" placeholder="Email" class="txt" name = "email" required>
-                <input type = "password" placeholder="Parola" class="txt" name = "pass" required>
-                <input type = "password" placeholder="Confirma parola" class="txt" name = "cpass" required>
-                <input type = "submit" value="Register" class="registerBtn" name="btn-save">
-            </form>
-            <a id = "goLog" href="login.php">Deja ai un cont?Logheaza-te aici</a></a>
-        </div>
-        
+        <?php
+            require_once('connection.php');
+            $sql = "select * from books";
+            $result = mysqli_query($con, $sql);
+            if(mysqli_num_rows($result) == 0)
+                echo '<script>alert("Nu exista nicio carte in stoc.")</script>';
+
+            while ($row = $result->fetch_assoc())
+            {
+                echo "Titlu: " . $row['titlu'];
+                echo "<br>";
+                echo "Autor: " . $row['autor'];
+                echo "<br>";
+                echo "Categorie: " . $row['categorie'];
+                echo "<br>";
+                echo "Descriere: " . $row['descriere'];
+                echo "<br>";
+                echo '<img src="'.$row['url_img'].'"/>';
+                echo "<br>";
+                echo "<hr>";
+                echo "<br>";
+            }
+        ?>
     </body>
 </html>

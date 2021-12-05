@@ -6,6 +6,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
         <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Book_Hexagonal_Icon.svg/1189px-Book_Hexagonal_Icon.svg.png">
         <style>
+            .optiuniAdm{
+                padding: 2%;
+            }
+            .optiuniAdm form{
+                font-size: 24px;
+            }
             .log{
                 text-decoration: none; 
                 font-size: 24px;
@@ -14,7 +20,7 @@
     </head>
     <body>
         <header id = "head">
-            <a href = "home.html" class = "acasa">
+            <a href = "home.php" class = "acasa">
                 <img id = "homeImg" src= https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Book_Hexagonal_Icon.svg/1189px-Book_Hexagonal_Icon.svg.png alt="Acasa">
             </a>
 
@@ -32,32 +38,38 @@
                 <a href = "mainCont.php" class = "contTxt">CONTUL TAU</a>
             </div>   
         </header>
-        <div class ="container">
-            <form id = "search">
-                <input type = "text" id = "txtSearch" placeholder="Cauta dupa numele cartii" id = "searchBar">
-                <button type = "submit" id = "btnSearch"> 
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png">
-                </button>
-            </form> 
-        </div>
         <div class = "meniu">
-            <a href = "home.html">Acasa</a>
-            <a href = "carti.html">Carti</a>
-            <a href = "index.html">Despre</a>
+            <a href = "home.php">Acasa</a>
+            <a href = "carti.php">Cauta carti</a>
+            <a href = "index.php">Despre</a>
         </div>
         <?php
             session_start();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-                echo "Bun venit, " . $_SESSION['nume'] . "!";
+                echo "Bun venit, " . $_SESSION['nume'] . "! Rolul tau este: admin.";
                 ?>
-                <form method="POST" action="logout.php">  
-                    <input type="submit" value = "Log Out">  
-                </form> 
+                <div class = "optiuniAdm">
+                    Optiuni admin:
+                    <form method="POST" action="addBook.php">  
+                        <input type="submit" value = "Adauga o carte">  
+                    </form>
+                    <form method="POST" action="modBook.php">  
+                        <input type="submit" value = "Modifica descrierea unei carti.">  
+                    </form> 
+                    <form method="POST" action="rmvBook.php">  
+                        <input type="submit" value = "Sterge o carte">  
+                    </form> 
+                    <form method="POST" action="logout.php">  
+                        <input type="submit" value = "Log Out">  
+                    </form>  
+                </div>
                 <?php
-                
             } else {
                 ?>
-                <a class = "log" href = "login.php">Trebuie sa va logati ca sa aveti acces.</a>
+                <div style="text-align:center; margin-top:10%">
+                    <a class = "log" href = "login.php">Trebuie sa va logati ca sa aveti acces.</a>
+                </div>
+                
                 <?php
             }
         ?>

@@ -1,38 +1,15 @@
 <?php
-
-    session_start();
-
     require_once('connection.php');
 
-    if(isset($_POST['email'])){
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
-        $pass = md5($pass);
-
-        $sql = "select * from users where email='".$email."' and parola='".$pass."' limit 1";
-
-        $result = mysqli_query($con, $sql);
-
-        if(mysqli_num_rows($result) == 1){
-            
-            $row = $result->fetch_assoc();
-            $_SESSION['loggedin'] = true;
-            $_SESSION['email'] = $email;
-            $_SESSION['nume'] = $row['nume'];
-            $_SESSION['prenume'] = $row["prenume"];
-            $_SESSION['nr_penalizari'] = $row["nr_penalizari"];
-            header("Location:mainCont.php");
-            exit();
-        }
-        else{
-            echo '<script>alert("Email/parola gresita")</script>';
-        }
-
+    if(isset($_POST['btn-save']))
+    {
+        $isbn = mysqli_real_escape_string($con, $_POST['isbn']);
+        $desc = mysqli_real_escape_string($con, $_POST['descriere']);
+        $sql = "update books set descriere = '$desc' where isbn = '$isbn'";
+        mysqli_query($con, $sql);
+        header("Location:home.php");
     }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang = "en">
@@ -59,7 +36,7 @@
             </div>
 
             <div class = "cont">
-                <a href = "mainCont.php" class = "contTxt">CONTUL TAU</a>
+                <a href = "cont.php" class = "contTxt">CONTUL TAU</a>
             </div>   
         </header>
         <div class = "meniu">
@@ -69,11 +46,10 @@
         </div>
         <div class="signup-form">
             <form action ="#" method="post">
-                <input type = "email" placeholder="Email" class="txt" name = "email" required>
-                <input type = "password" placeholder="Parola" class="txt" name = "pass" required>
-                <input type = "submit" value="Login" class="registerBtn" name="btn-save">
+                <input type = "text" placeholder="ISBN" class="txt" name="isbn" required>
+                <input type = "text" placeholder="Descriere" class="txt" name = "descriere" required>
+                <input type = "submit" value="Modifica" class="registerBtn" name="btn-save">
             </form>
-            <a id = "goLog" href="cont.php">Nu ai cont? Inregistreaza-te aici</a></a>
         </div>
         
     </body>

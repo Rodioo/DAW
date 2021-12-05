@@ -5,5 +5,5 @@ unset($_SESSION["nume"]);
 unset($_SESSION["prenume"]);
 unset($_SESSION["nr_penalizari"]);
 session_destroy();
-header("Location:home.html");
+header("Location:home.php");
 ?>
