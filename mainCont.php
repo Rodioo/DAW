@@ -46,25 +46,74 @@
         <?php
             session_start();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-                echo "Bun venit, " . $_SESSION['nume'] . "! Rolul tau este: admin.";
-                ?>
-                <div class = "optiuniAdm">
-                    Optiuni admin:
-                    <form method="POST" action="addBook.php">  
-                        <input type="submit" value = "Adauga o carte">  
-                    </form>
-                    <form method="POST" action="modBook.php">  
-                        <input type="submit" value = "Modifica descrierea unei carti.">  
-                    </form> 
-                    <form method="POST" action="rmvBook.php">  
-                        <input type="submit" value = "Sterge o carte">  
-                    </form> 
-                    <form method="POST" action="logout.php">  
-                        <input type="submit" value = "Log Out">  
-                    </form>  
-                </div>
+                if($_SESSION['rol'] == "admin"){
+                    echo "Bun venit, " . $_SESSION['nume'] . "! Rolul tau este: admin.";
+                    ?>
+                    <div class = "optiuniAdm">
+                        Optiuni admin:
+                        <form method="POST" action="addBook.php">  
+                            <input type="submit" value = "Adauga o carte">  
+                        </form>
+                        <form method="POST" action="modBook.php">  
+                            <input type="submit" value = "Modifica descrierea unei carti.">  
+                        </form> 
+                        <form method="POST" action="rmvBook.php">  
+                            <input type="submit" value = "Sterge o carte">  
+                        </form>
+                        <form method="POST" action="makeBiblio.php">  
+                            <input type="submit" value = "Transforma un client in bibliotecar">  
+                        </form> 
+                        <form method="POST" action="logout.php">  
+                            <input type="submit" value = "Log Out">  
+                        </form>  
+                    </div>
+                    <?php
+                }
+                else if($_SESSION['rol'] == "client"){
+                    echo "Bun venit, " . $_SESSION['nume'] . "! Rolul tau este: client.";
+                    ?>
+                    <div class = "optiuniClient">
+                        Optiuni client:
+                        <form method="POST" action="rezerva.php">  
+                            <input type="submit" value = "Rezerva o carte">  
+                        </form> 
+                        <form method="POST" action="inchiriaza.php">  
+                            <input type="submit" value = "Inchiriaza o carte">  
+                        </form>
+                        <form method="POST" action="verifReturn.php">  
+                            <input type="submit" value = "Verifica data de returnare a cartilor inchiriate">  
+                        </form>
+                        <form method="POST" action="returneaza.php">  
+                            <input type="submit" value = "Returneaza o carte">  
+                        </form>
+                        <form method="POST" action="cancelRez.php">  
+                            <input type="submit" value = "Anuleaza o rezervare">  
+                        </form>
+                        <form method="POST" action="logout.php">  
+                            <input type="submit" value = "Log Out">  
+                        </form>  
+                    </div>
                 <?php
-            } else {
+                }
+                else if($_SESSION['rol'] == "bibliotecar"){
+                    echo "Bun venit, " . $_SESSION['nume'] . "! Rolul tau este: bibliotecar.";
+                    ?>
+                    <div class = "optiuniBiblio">
+                        Optiuni bibliotecar:
+                        <form method="POST" action="modPen.php">  
+                            <input type="submit" value = "Modifica numar de penalizari al unui client">  
+                        </form>  
+                        <form method="POST" action="delClient.php">  
+                            <input type="submit" value = "Sterge un cont de client">  
+                        </form>   
+                        <form method="POST" action="logout.php">  
+                            <input type="submit" value = "Log Out">  
+                        </form>  
+                    </div>
+                <?php
+                }
+            } 
+            else {
                 ?>
                 <div style="text-align:center; margin-top:10%">
                     <a class = "log" href = "login.php">Trebuie sa va logati ca sa aveti acces.</a>

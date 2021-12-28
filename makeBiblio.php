@@ -9,19 +9,18 @@
         if(!empty($_POST['spam'])) die("Spam alert");//fac un field in form invizibil iar daca este completat inseamna ca e un bot care face formularul asa ca il inchid
         $compToken = $_POST['token'];
         if($compToken === $token) {
-            $isbn = htmlspecialchars(mysqli_real_escape_string($con, $_POST['isbn']));
-            $desc = htmlspecialchars(mysqli_real_escape_string($con, $_POST['descriere']));
-            $sql = "update books set descriere = '$desc' where isbn = '$isbn'";
+            $email = htmlspecialchars(mysqli_real_escape_string($con, $_POST['mail']));
+            $sql = "update users set rol = 'bibliotecar' where email = '$email'";
             mysqli_query($con, $sql);
             if(mysqli_affected_rows($con) == 0)
                 echo ("<script LANGUAGE='JavaScript'>
-                window.alert('Nu exista aceasta carte');
-                window.location.href='home.php';
+                window.alert('E-mail gresit sau rolul este deja de bibliotecar.');
+                window.location.href='mainCont.php';
                 </script>");
             else
                 echo ("<script LANGUAGE='JavaScript'>
-                window.alert('Carte modificata cu succes.');
-                window.location.href='home.php';
+                window.alert('Rol modificat cu succes.');
+                window.location.href='mainCont.php';
                 </script>");
         }
         else
@@ -29,6 +28,7 @@
                 window.alert('Form spoofing/CSRF error.');
                 window.location.href='home.php';
                 </script>");
+        
     }
 ?>
 
@@ -69,8 +69,7 @@
             <form action ="#" method="post">
                 <input style ="display:none" type="text" id="spam" name="spam">
                 <input type="hidden"  value='abc123abc123' name="token">
-                <input type = "text" placeholder="ISBN" class="txt" name="isbn" required>
-                <input type = "text" placeholder="Descriere" class="txt" name = "descriere" required>
+                <input type = "text" placeholder="E-mail cont" class="txt" name="mail" required>
                 <input type = "submit" value="Modifica" class="registerBtn" name="btn-save">
             </form>
         </div>

@@ -1,16 +1,23 @@
 <?php
+    session_start();
+    $token = 'abc123abc123';
+    $_SESSION['token'] = $token;
     require_once('connection.php');
 
     if(isset($_POST['btn-save']))
     {
-        $isbn = mysqli_real_escape_string($con, $_POST['isbn']);
-        $titlu = mysqli_real_escape_string($con, $_POST['titlu']);
-        $autor = mysqli_real_escape_string($con, $_POST['autor']);
-        $categ = mysqli_real_escape_string($con, $_POST['categorie']);
-        $desc = mysqli_real_escape_string($con, $_POST['descriere']);
-        $url_img = mysqli_real_escape_string($con, $_POST['url_img']);
+        if(!empty($_POST['spam'])) die("Spam alert");//fac un field in form invizibil iar daca este completat inseamna ca e un bot care face formularul asa ca il inchid
+        $compToken = $_POST['token'];
+        if($compToken === $token){
+            $isbn = htmlspecialchars(mysqli_real_escape_string($con, $_POST['isbn']));
+            $titlu = htmlspecialchars(mysqli_real_escape_string($con, $_POST['titlu']));
+            $autor = htmlspecialchars(mysqli_real_escape_string($con, $_POST['autor']));
+            $categ = htmlspecialchars(mysqli_real_escape_string($con, $_POST['categorie']));
+            $desc = htmlspecialchars(mysqli_real_escape_string($con, $_POST['descriere']));
+            $url_img = htmlspecialchars(mysqli_real_escape_string($con, $_POST['url_img']));
+            $nr_exemplare = htmlspecialchars(mysqli_real_escape_string($con, $_POST['nr_exemplare']));
 
-            $sql = "insert into books (isbn, titlu, autor, categorie, descriere, url_img) values('$isbn', '$titlu', '$autor', '$categ', '$desc', '$url_img')";
+            $sql = "insert into books (isbn, titlu, autor, categorie, descriere, url_img, nr_exemplare) values('$isbn', '$titlu', '$autor', '$categ', '$desc', '$url_img', '$nr_exemplare')";
             $result = mysqli_query($con, $sql);
             if($result)
             {
@@ -23,7 +30,14 @@
                 echo ("<script LANGUAGE='JavaScript'>
                 window.alert('Eroare la adaugarea cartii.');
                 window.location.href='mainCont.php';
-                </script>");            }
+                </script>");            
+            }
+        }
+        else
+            echo ("<script LANGUAGE='JavaScript'>
+                window.alert('Form spoofing/CSRF error.');
+                window.location.href='home.php';
+                </script>");
             
     }
 ?>
@@ -53,7 +67,7 @@
             </div>
 
             <div class = "cont">
-                <a href = "cont.php" class = "contTxt">CONTUL TAU</a>
+                <a href = "mainCont.php" class = "contTxt">CONTUL TAU</a>
             </div>   
         </header>
         <div class = "meniu">
@@ -63,12 +77,15 @@
         </div>
         <div class="signup-form">
             <form action ="#" method="post">
+                <input style ="display:none" type="text" id="spam" name="spam">
+                <input type="hidden"  value='abc123abc123' name="token">
                 <input type = "text" placeholder="ISBN" class="txt" name="isbn" required>
                 <input type = "text" placeholder="Titlu" class="txt" name="titlu" required>
                 <input type = "text" placeholder="Autor" class="txt" name = "autor" required>
                 <input type = "text" placeholder="Categorie" class="txt" name = "categorie" required>
                 <input type = "text" placeholder="Descriere" class="txt" name = "descriere" required>
                 <input type = "text" placeholder="URL imagine" class="txt" name = "url_img" required>
+                <input type = "text" placeholder="Numar exemplare" class="txt" name = "nr_exemplare" required>
                 <input type = "submit" value="Adauga" class="registerBtn" name="btn-save">
             </form>
         </div>

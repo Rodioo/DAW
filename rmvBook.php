@@ -1,12 +1,33 @@
 <?php
+    session_start();
+    $token = 'abc123abc123';
+    $_SESSION['token'] = $token;
     require_once('connection.php');
 
     if(isset($_POST['btn-save']))
     {
-        $isbn = mysqli_real_escape_string($con, $_POST['isbn']);
-        $sql = "delete from books where isbn = '$isbn'";
-        mysqli_query($con, $sql);
-        header("Location:home.php");
+        if(!empty($_POST['spam'])) die("Spam alert");   //fac un field in form invizibil iar daca este completat inseamna ca e un bot care face formularul asa ca il inchid
+        $compToken = $_POST['token'];
+        if($compToken === $token) {
+            $isbn = htmlspecialchars(mysqli_real_escape_string($con, $_POST['isbn']));
+            $sql = "delete from books where isbn = '$isbn'";
+            mysqli_query($con, $sql);
+            if(mysqli_affected_rows($con) == 0)
+                echo ("<script LANGUAGE='JavaScript'>
+                window.alert('Nu exista aceasta carte.');
+                window.location.href='mainCont.php';
+                </script>");
+            else
+                echo ("<script LANGUAGE='JavaScript'>
+                window.alert('Carte stearsa cu succes.');
+                window.location.href='mainCont.php';
+                </script>");
+        }
+        else
+            echo ("<script LANGUAGE='JavaScript'>
+                window.alert('Form spoofing/CSRF error.');
+                window.location.href='home.php';
+                </script>");
     }
 ?>
 
@@ -35,7 +56,7 @@
             </div>
 
             <div class = "cont">
-                <a href = "cont.php" class = "contTxt">CONTUL TAU</a>
+                <a href = "mainCont.php" class = "contTxt">CONTUL TAU</a>
             </div>   
         </header>
         <div class = "meniu">
@@ -45,8 +66,10 @@
         </div>
         <div class="signup-form">
             <form action ="#" method="post">
+                <input style ="display:none" type="text" id="spam" name="spam">
+                <input type="hidden"  value='abc123abc123' name="token">
                 <input type = "text" placeholder="ISBN" class="txt" name="isbn" required>
-                <input type = "submit" value="Modifica" class="registerBtn" name="btn-save">
+                <input type = "submit" value="Sterge" class="registerBtn" name="btn-save">
             </form>
         </div>
         

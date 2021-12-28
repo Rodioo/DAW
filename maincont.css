@@ -138,7 +138,7 @@ input[type=text], input[type=email], input[type=password] {
     background: #f1f1f1;
 }
 
-  input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
     background-color: #ddd;
     outline: none;
 }
@@ -153,13 +153,17 @@ input[type=text], input[type=email], input[type=password] {
     width: 50%;
     opacity: 0.9;
     margin-left: 25%;
-  }
+}
   
-  .registerbtn:hover {
+.registerbtn:hover {
     opacity: 1;
-  }
+}
+
 #goLog{
     text-decoration: none;
 }
+
+
+
 
 

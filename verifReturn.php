@@ -33,32 +33,43 @@
         </div>
         <?php
             require_once('connection.php');
-            $sql = "select * from books";
+            session_start();
+
+            $email = $_SESSION['email'];
+            $sql = "select id_user from users where email = '$email'";
             $result = mysqli_query($con, $sql);
+            $row = $result->fetch_assoc();
+            $id_user = $row['id_user'];
+
+            $sql = "select * from inchirieri where id_user = '$id_user' and data_returnare is null;";
+            $result = mysqli_query($con, $sql);
+    
+
             if($result == false or mysqli_num_rows($result) == 0){
-                echo '<script>alert("Nu exista nicio carte in stoc.")</script>';
+                ?>
+                <div style="text-align:center; margin-top:10%">
+                    Nu aveti nicio carte de returnat.
+                </div>
+            <?php
             }
             else{
                 while ($row = $result->fetch_assoc())
                 {
-                    echo "ISBN: " . $row['isbn'];
+                    $isbn = $row['isbn'];
+                    $sql2 = "select * from books where isbn = '$isbn';";
+                    $result2 = mysqli_query($con, $sql2);
+                    $row2 = $result2->fetch_assoc();
+
+                    echo "Titlu carte: " . $row2['titlu'];
                     echo "<br>";
-                    echo "Titlu: " . $row['titlu'];
-                    echo "<br>";
-                    echo "Autor: " . $row['autor'];
-                    echo "<br>";
-                    echo "Categorie: " . $row['categorie'];
-                    echo "<br>";
-                    echo "Descriere: " . $row['descriere'];
-                    echo "<br>";
-                    echo "Numar exemplare: " . $row['nr_exemplare'];
-                    echo "<br>";
-                    echo '<img src="'.$row['url_img'].'"/>';
-                    echo "<br>";
+                    echo "ISBN: " . $isbn;
+                    echo "<br>"; 
+                    echo "Data limita de returnare: " . $row['data_limita'];
                     echo "<hr>";
                     echo "<br>";
                 }
-            }  
+            }
+            
         ?>
     </body>
 </html>

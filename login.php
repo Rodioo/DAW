@@ -1,32 +1,48 @@
 <?php
 
     session_start();
+    $token = 'abc123abc123';
+    $_SESSION['token'] = $token;
 
     require_once('connection.php');
 
     if(isset($_POST['email'])){
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
-        $pass = md5($pass);
+        if(!empty($_POST['spam'])) die("Spam alert");//fac un field in form invizibil iar daca este completat inseamna ca e un bot care face formularul asa ca il inchid
+        $compToken = $_POST['token'];
+        if($compToken === $token) {
+            $email = htmlspecialchars(mysqli_real_escape_string($con, $_POST['email']));
+            $pass = htmlspecialchars(mysqli_real_escape_string($con, $_POST['pass']));
+            $pass = md5($pass);
 
-        $sql = "select * from users where email='".$email."' and parola='".$pass."' limit 1";
+            $sql = "select * from users where email='".$email."' and parola='".$pass."' limit 1";
 
-        $result = mysqli_query($con, $sql);
+            $result = mysqli_query($con, $sql);
 
-        if(mysqli_num_rows($result) == 1){
-            
-            $row = $result->fetch_assoc();
-            $_SESSION['loggedin'] = true;
-            $_SESSION['email'] = $email;
-            $_SESSION['nume'] = $row['nume'];
-            $_SESSION['prenume'] = $row["prenume"];
-            $_SESSION['nr_penalizari'] = $row["nr_penalizari"];
-            header("Location:mainCont.php");
-            exit();
-        }
-        else{
-            echo '<script>alert("Email/parola gresita")</script>';
-        }
+            if(mysqli_num_rows($result) == 1){
+                
+                $row = $result->fetch_assoc();
+                $_SESSION['loggedin'] = true;
+                $_SESSION['agent'] = $_SERVER['HTTP_USER_AGENT'];
+                $_SESSION['email'] = $email;
+                $_SESSION['nume'] = $row['nume'];
+                $_SESSION['prenume'] = $row["prenume"];
+                $_SESSION['nr_penalizari'] = $row["nr_penalizari"];
+                $_SESSION['rol'] = $row["rol"];
+                if($_SESSION['agent'] != $_SERVER['HTTP_USER_AGENT']) {
+                    die('Sesiunea ar putea fi compromisa (HTTP Spoofing).');
+                }
+                header("Location:mainCont.php");
+                exit();
+            }
+            else{
+                echo '<script>alert("Email/parola gresita")</script>';
+            }
+        } 
+        else
+            echo ("<script LANGUAGE='JavaScript'>
+                window.alert('Form spoofing/CSRF error.');
+                window.location.href='home.php';
+                </script>");
 
     }
 ?>
@@ -69,6 +85,8 @@
         </div>
         <div class="signup-form">
             <form action ="#" method="post">
+                <input style ="display:none" type="text" id="spam" name="spam">
+                <input type="hidden"  value="abc123abc123" name="token">
                 <input type = "email" placeholder="Email" class="txt" name = "email" required>
                 <input type = "password" placeholder="Parola" class="txt" name = "pass" required>
                 <input type = "submit" value="Login" class="registerBtn" name="btn-save">

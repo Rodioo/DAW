@@ -33,6 +33,8 @@
         </div>
         <div class="signup-form">
             <form action ="process.php" method="post">
+                <input style ="display:none" type="text" id="spam" name="spam">
+                <input type="hidden"  value='abc123abc123' name="token">
                 <input type = "text" placeholder="Nume" class="txt" name="nume" required>
                 <input type = "text" placeholder="Prenume" class="txt" name="prenume" required>
                 <input type = "email" placeholder="Email" class="txt" name = "email" required>

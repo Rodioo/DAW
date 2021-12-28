@@ -28,6 +28,8 @@
         </header>
         <div class ="container">
             <form action="#" method ="post" id = "search">
+                <input style ="display:none" type="text" id="spam" name="spam">
+                <input type="hidden"  value='abc123abc123' name="token">
                 <input type = "text" id = "txtSearch" placeholder="Cauta dupa numele cartii" name = "srch" id = "searchBar">
                 <button type = "submit" id = "btnSearch" name="btn-save"> 
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png">

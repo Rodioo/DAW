@@ -44,7 +44,7 @@
                 <br>
                 &nbsp; &nbsp; &nbsp; - poate sa vada ce carti sunt disponibile pentru inchiriat.
                 <br>
-                &nbsp; &nbsp; &nbsp; - poate sa caute orice carte si autor doreste.
+                &nbsp; &nbsp; &nbsp; - poate sa caute orice carte doreste.
                 <br>
                 &nbsp; &nbsp; &nbsp; - poate sa isi creeze un cont nou pentru a deveni client.
                 <br>
@@ -57,20 +57,20 @@
                 <br>
                 &nbsp; &nbsp; &nbsp; - poate sa faca o rezervare pentru o carte.
                 <br>
-                &nbsp; &nbsp; &nbsp; - poate sa vada data de returnare a cartilor rezervate.
+                &nbsp; &nbsp; &nbsp; - poate sa vada data de returnare a cartilor inchiriate.
+                <br>
+                &nbsp; &nbsp; &nbsp; - poate sa returneze o carte.
+                <br>
+                &nbsp; &nbsp; &nbsp; - poate sa anuleze o rezervare.
                 <br>
                 &nbsp; &nbsp; &nbsp; - poate sa se aboneze la newsletter pentru a vedea ce promotii si carti noi apar.
-                <br>
-                &nbsp; &nbsp; &nbsp; - poate sa primeasca oferte in functie de cat de vechi este contul.
-                <br>
-                &nbsp; &nbsp; &nbsp; - sa scrie recenzii cartilor imprumutate.
                 <br>
                 <br>
                 - bibliotecar
                 <br>
-                &nbsp; &nbsp; &nbsp; - poate sa marcheze o carte ca fiind imprumutata, acest lucru avand efect atat asupra bazei de date, cat si a numarului de exemplare disponibile afisat pe site.
+                &nbsp; &nbsp; &nbsp; - poate sa stearga un cont de client daca acesta are prea multe penalizari.
                 <br>
-                &nbsp; &nbsp; &nbsp; - poate sa penalizeze un cont de client daca acesta nu respecta termenul de predare al cartii imprumutate.
+                &nbsp; &nbsp; &nbsp; - poate sa modifice numarul de penalizari al unui client.
                 <br>
                 <br>
                 - admin
@@ -79,7 +79,8 @@
                 <br>
                 &nbsp; &nbsp; &nbsp; - poate sa stearga o carte de pe site.
                 <br>
-                &nbsp; &nbsp; &nbsp; - poate sa stearga un cont de client daca acesta are prea multe penalizari din partea bibliotecarului.
+                &nbsp; &nbsp; &nbsp; - poate sa transforme un cont de client in cont de bibliotecar.
+                
                 <br>
                 <br>     
             </div>
