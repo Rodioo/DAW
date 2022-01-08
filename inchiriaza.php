@@ -1,6 +1,13 @@
 <?php
     date_default_timezone_set('Europe/Bucharest');
     session_start();
+    if(!$_SESSION['loggedin']){
+        echo ("<script LANGUAGE='JavaScript'>
+        window.alert('Trebuie sa va logati pentru a continua');
+        window.location.href='mainCont.php';
+        </script>");
+        exit();
+    }
     $token = 'abc123abc123';
     $_SESSION['token'] = $token;
     require_once('connection.php');
