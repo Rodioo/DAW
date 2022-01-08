@@ -34,6 +34,13 @@
         <?php
             require_once('connection.php');
             session_start();
+            if(!$_SESSION['loggedin']){
+                echo ("<script LANGUAGE='JavaScript'>
+                window.alert('Trebuie sa va logati pentru a continua');
+                window.location.href='mainCont.php';
+                </script>");
+                exit();
+            }
 
             $email = $_SESSION['email'];
             $sql = "select id_user from users where email = '$email'";

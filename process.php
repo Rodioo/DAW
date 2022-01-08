@@ -1,4 +1,8 @@
 <?php
+    require 'C:/Web/Apache24/htdocs/Lumea Cartii/vendor/autoload.php';
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
     session_start();
     $token = 'abc123abc123';
     $_SESSION['token'] = $token;
@@ -23,6 +27,28 @@
                 $result = mysqli_query($con, $sql);
                 if($result)
                 {
+
+                    $mail = new PHPMailer(true);
+                    
+                    try {                                       
+                        $mail->isSMTP();                                            
+                        $mail->Host       = 'smtp.gmail.com';                 
+                        $mail->SMTPAuth   = true;                             
+                        $mail->Username   = "lumea.cartii123@gmail.com";                    
+                        $mail->Password   = 'Parola1!';                                               
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port       = 587; 
+                    
+                        $mail->setFrom('lumea.cartii123@gmail.com', 'Lumea Cartii Admin');           
+                        $mail->addAddress($email);
+                        
+                        $mail->isHTML(true);                                  
+                        $mail->Subject = 'Cont creat cu succes';
+                        $mail->Body    = 'Bun venit in comunitatea noastra de cititori! ';
+                        $mail->send();
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
                     echo ("<script LANGUAGE='JavaScript'>
                     window.alert('Cont creat cu succes.');
                     window.location.href='login.php';

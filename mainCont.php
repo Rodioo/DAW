@@ -89,6 +89,9 @@
                         <form method="POST" action="cancelRez.php">  
                             <input type="submit" value = "Anuleaza o rezervare">  
                         </form>
+                        <form method="POST" action="stergeCont.php">  
+                            <input type="submit" value = "Sterge contul">  
+                        </form>  
                         <form method="POST" action="logout.php">  
                             <input type="submit" value = "Log Out">  
                         </form>  
