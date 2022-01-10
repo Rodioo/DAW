@@ -17,7 +17,7 @@
         $compToken = $_POST['token'];
         if($compToken === $token) {
             $email = htmlspecialchars(mysqli_real_escape_string($con, $_POST['email']));
-            $sql = "delete from users where email = '$email'";
+            $sql = "delete from users where email = '$email' and rol = 'client';";
             mysqli_query($con, $sql);
             if(mysqli_affected_rows($con) == 0)
                 echo ("<script LANGUAGE='JavaScript'>

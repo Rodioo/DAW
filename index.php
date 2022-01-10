@@ -110,7 +110,7 @@
                 <br>     
             </div>
             <div class = "bd">Informatii despre baza de date</div>
-                <img id = "bdImg" src="https://i.imgur.com/wTWgp2T.png" alt="Diagrama Conceptuala">
+                <img id = "bdImg" src="https://i.imgur.com/JN07Oe0.png" alt="Diagrama Conceptuala">
         </div>
  
     </body>

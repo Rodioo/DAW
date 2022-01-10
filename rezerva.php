@@ -18,8 +18,13 @@
         if($compToken === $token) {
             $isbn = htmlspecialchars(mysqli_real_escape_string($con, $_POST['isbn']));
             $data_rez = htmlspecialchars(mysqli_real_escape_string($con, $_POST['data_rez']));
-            if($data_rez < date("Y-m-d"))
-                echo '<script>alert("Data invalida.")</script>';
+            if($data_rez < date("Y-m-d")){
+                echo ("<script LANGUAGE='JavaScript'>
+                    window.alert('Data invalida');
+                    window.location.href='rezerva.php';
+                    </script>");
+                    exit();
+            }
 
             $sql = "select * from books where isbn = '$isbn'";
             $result = mysqli_query($con, $sql);
