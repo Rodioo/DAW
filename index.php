@@ -30,7 +30,32 @@
             <a href = "home.php">Acasa</a>
             <a href = "carti.php">Cauta carti</a>
             <a href = "index.php">Despre</a>
-        </div>    
+        </div>
+        <div class = "despre1">STATISTICI</div>
+        <?php
+            require_once('connection.php');
+
+            $sql = "select count(ip) from ips;";
+            $result = mysqli_query($con, $sql);
+            $row = $result->fetch_assoc();
+            $nr = $row['count(ip)'];
+            echo '<div class = "info1"> Site-ul a fost vizitat de ' . $nr . ' persoane unice. </div>';
+            echo '<br>';
+
+            $sql = "select count(id_user) from users where rol = 'client'";
+            $result = mysqli_query($con, $sql);
+            $row = $result->fetch_assoc();
+            $nr = $row['count(id_user)'];
+            echo '<div class = "info1"> In prezent ' . $nr . ' persoane au cont de client pe acest site. </div>';
+            echo '<br>';
+
+            $sql = "select sum(nr_exemplare) from books";
+            $result = mysqli_query($con, $sql);
+            $row = $result->fetch_assoc();
+            $nr = $row['sum(nr_exemplare)'];
+            echo '<div class = "info1"> In prezent sunt ' . $nr . ' exemplare in biblioteca noastra. </div>';
+
+        ?>    
         <div class = "despre1">DESPRE PROIECT</div>
         <div class = "info1">
             Acest site are ca scop facilitarea obtinerii de informatii pentru un vizitator oarecare si inchirierea cartilor pentru clienti.
@@ -87,7 +112,6 @@
             <div class = "bd">Informatii despre baza de date</div>
                 <img id = "bdImg" src="https://i.imgur.com/wTWgp2T.png" alt="Diagrama Conceptuala">
         </div>
-        
  
     </body>
 </html>

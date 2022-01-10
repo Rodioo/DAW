@@ -1,3 +1,14 @@
+<?php
+    require_once('connection.php');
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $sql = "select ip from ips where ip = '$ip';";
+    $result = mysqli_query($con, $sql);
+    if(mysqli_num_rows($result) == 0){
+        $sql = "insert into ips (ip) values ('$ip');";
+        mysqli_query($con, $sql);
+    }
+        
+?>
 <!DOCTYPE html>
 <html lang = "en">
     <head>

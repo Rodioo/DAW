@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang = "en">
     <head>
@@ -6,10 +9,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
         <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Book_Hexagonal_Icon.svg/1189px-Book_Hexagonal_Icon.svg.png">
         <style>
-            .optiuniAdm{
+            .optiuni{
                 padding: 2%;
             }
-            .optiuniAdm form{
+            .optiuni form{
                 font-size: 24px;
             }
             .log{
@@ -44,12 +47,11 @@
             <a href = "index.php">Despre</a>
         </div>
         <?php
-            session_start();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 if($_SESSION['rol'] == "admin"){
                     echo "Bun venit, " . $_SESSION['nume'] . "! Rolul tau este: admin.";
                     ?>
-                    <div class = "optiuniAdm">
+                    <div class = "optiuni">
                         Optiuni admin:
                         <form method="POST" action="addBook.php">  
                             <input type="submit" value = "Adauga o carte">  
@@ -72,7 +74,7 @@
                 else if($_SESSION['rol'] == "client"){
                     echo "Bun venit, " . $_SESSION['nume'] . "! Rolul tau este: client.";
                     ?>
-                    <div class = "optiuniClient">
+                    <div class = "optiuni">
                         Optiuni client:
                         <form method="POST" action="rezerva.php">  
                             <input type="submit" value = "Rezerva o carte">  
@@ -101,7 +103,7 @@
                 else if($_SESSION['rol'] == "bibliotecar"){
                     echo "Bun venit, " . $_SESSION['nume'] . "! Rolul tau este: bibliotecar.";
                     ?>
-                    <div class = "optiuniBiblio">
+                    <div class = "optiuni">
                         Optiuni bibliotecar:
                         <form method="POST" action="modPen.php">  
                             <input type="submit" value = "Modifica numar de penalizari al unui client">  

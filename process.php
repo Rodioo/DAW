@@ -1,5 +1,7 @@
 <?php
-    require 'C:/Web/Apache24/htdocs/Lumea Cartii/vendor/autoload.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/phpmailer/Exception.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/phpmailer/PHPMailer.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/phpmailer/SMTP.php';
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;

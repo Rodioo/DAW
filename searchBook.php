@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $token = 'abc123abc123';
     $_SESSION['token'] = $token;
     require_once('connection.php');

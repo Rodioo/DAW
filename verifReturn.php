@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang = "en">
     <head>
@@ -33,7 +36,7 @@
         </div>
         <?php
             require_once('connection.php');
-            session_start();
+            
             if(!$_SESSION['loggedin']){
                 echo ("<script LANGUAGE='JavaScript'>
                 window.alert('Trebuie sa va logati pentru a continua');
